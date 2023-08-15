@@ -17,14 +17,9 @@ public class CustomerController {
     @GetMapping("/search")
     public Page<Customer> search(
             @RequestParam("searchTerm") String searchTerm,
-            @RequestParam(
-                    value = "page",
-                    required = false,
-                    defaultValue = "0") int page,
-            @RequestParam(
-                    value = "size",
-                    required = false,
-                    defaultValue = "10") int size) {
+            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size)
+    {
         return service.search(searchTerm, page, size);
 
     }
@@ -32,6 +27,11 @@ public class CustomerController {
     @GetMapping
     public Page<Customer> getAll() {
         return service.findAll();
+    }
+    @GetMapping("/page")
+    public Page<Customer> getPageParam(@RequestParam int page, @RequestParam int size) {
+        return service.findAll(page,size);
+
     }
 
 }

@@ -11,11 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    @Query("FROM Customer c " +
-           "WHERE LOWER(c.name) like %:searchTerm% " +
-           "OR LOWER(c.email) like %:searchTerm%")
-    Page<Customer> search(
-            @Param("searchTerm") String searchTerm,
-            Pageable pageable);
+    @Query("FROM Customer c WHERE LOWER(c.name) like %:searchTerm% OR LOWER(c.email) like %:searchTerm%")
+    Page<Customer> search(@Param("searchTerm") String searchTerm, Pageable pageable);
 
 }

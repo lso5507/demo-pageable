@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -27,16 +28,25 @@ public class DemoPageableApplication implements CommandLineRunner {
 
     @Autowired
     CustomerRepository repository;
-
+    //Test Example Data
     @Override
     public void run(String... args) throws Exception {
-        Arrays.asList(
-                Customer.builder().name("James Gosling").email("jamesgosling@java.com").build(),
-                Customer.builder().name("Guido van Rossum").email("guidovanrossum@python.com").build(),
-                Customer.builder().name("Larry Wall").email("larrywall@pearl.com").build(),
-                Customer.builder().name("Linus Torvalds").email("linustorvalds@linux.com").build(),
-                Customer.builder().name("Rod Johnson").email("Rod Johnson@springframework.com").build()
-        ).forEach(repository::save);
+        repository.saveAll(getCustomers());
+    }
+
+    private static List<Customer> getCustomers() {
+        return Arrays.asList(
+            Customer.builder().name("James Gosling").email("jamesgosling@java.com").build(),
+            Customer.builder().name("Guido van Rossum").email("guidovanrossum@python.com").build(),
+            Customer.builder().name("Larry Wall").email("larrywall@pearl.com").build(),
+            Customer.builder().name("Linus Torvalds").email("linustorvalds@linux.com").build(),
+            Customer.builder().name("Rod Johnson").email("Rod Johnson@springframework.com").build(),
+            Customer.builder().name("James Gosling1").email("jamesgosling@java.com").build(),
+            Customer.builder().name("Guido van Rossum1").email("guidovanrossum@python.com").build(),
+            Customer.builder().name("Larry Wall1").email("larrywall@pearl.com").build(),
+            Customer.builder().name("Linus Torvalds1").email("linustorvalds@linux.com").build(),
+            Customer.builder().name("Rod Johnson1").email("Rod Johnson@springframework.com").build()
+        );
     }
 
 }
